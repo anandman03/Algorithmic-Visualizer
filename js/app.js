@@ -1,8 +1,10 @@
 'use strict';
 
-// importing algorithms
-document.write('<script type="text/javascript" src="./js/bubbleSort.js"></script>');
+// import the constants
 document.write('<script type="text/javascript" src="./js/constants.js"></script>');
+
+// importing algorithms
+document.write('<script type="text/javascript" src="./js/algorithms/bubbleSort.js"></script>');
 
 // importing helpers
 document.write('<script type="text/javascript" src="./js/helpers/swap.js"></script>');
@@ -55,6 +57,10 @@ function startAlgorithm() {
 
         case 1:
             moves = getBubbleSortMoves(list);
+            break;
+
+        case 1:
+            moves = getSelectionSortMoves(list);
             break;
 
         default:
