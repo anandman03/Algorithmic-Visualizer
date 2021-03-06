@@ -50,17 +50,11 @@ footer {
     color: white;
     transition: all .4s ease-out;
 }
-.cell.visited {
+.cell.current {
     border-color: #6184D8;
     background-color: #6184D8;
     color: white;
     transition: .5s;
-}
-.cell.current {
-    border-color: #50C5B7;
-    background-color: #50C5B7;
-    color: white;
-    transition: all .4s ease-out;
 }
 .cell.min {
     background-color: #FF1493;
@@ -96,17 +90,11 @@ footer {
     color: white;
     transition: all .4s ease-out;
 }
-.s-cell.visited {
+.s-cell.current {
     border-color: #6184D8;
     background-color: #6184D8;
     color: white;
     transition: .5s;
-}
-.s-cell.current {
-    border-color: #50C5B7;
-    background-color: #50C5B7;
-    color: white;
-    transition: all .4s ease-out;
 }
 
 /* NAVBAR */
