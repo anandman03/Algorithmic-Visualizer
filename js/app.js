@@ -6,6 +6,7 @@ document.write('<script type="text/javascript" src="./js/constants.js"></script>
 // importing algorithms
 document.write('<script type="text/javascript" src="./js/algorithms/bubbleSort.js"></script>');
 document.write('<script type="text/javascript" src="./js/algorithms/selectionSort.js"></script>');
+document.write('<script type="text/javascript" src="./js/algorithms/insertionSort.js"></script>');
 
 // importing helpers
 document.write('<script type="text/javascript" src="./js/helpers/swap.js"></script>');
@@ -55,6 +56,7 @@ function startAlgorithm() {
     switch (algorithmType) {
         case 0:
             console.log("Not proven !!");
+            break;
 
         case 1:
             moves = getBubbleSortMoves(list);
@@ -62,6 +64,10 @@ function startAlgorithm() {
 
         case 2:
             moves = getSelectionSortMoves(list);
+            break;
+
+        case 3:
+            moves = getInsertionSortMoves(list);
             break;
 
         default:
