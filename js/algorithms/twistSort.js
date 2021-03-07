@@ -1,6 +1,6 @@
 'use strict';
 
-function getQuickSortMoves(list) {
+function getTwistSortMoves(list) {
     let moves = [];
     let array = getNumericalValues(list);
 
