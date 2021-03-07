@@ -20,7 +20,6 @@ function mergeSort(array, start, end, moves) {
 function merge(array, start, mid, end, moves) {
     let sortArray = [];
     let fptr = start, bptr = mid + 1;
-    console.log(array);
     while(fptr <= mid && bptr <= end) {
         if(array[fptr] <= array[bptr]) {
             sortArray.push(array[fptr++]);
