@@ -57,8 +57,8 @@ function startAlgorithm() {
 
     let algorithmType = Number(document.querySelector(".algoMenu").value);
     switch (algorithmType) {
-        case 0: console.log("Not proven !!");
-            break;
+        case 0: alert("No Algorithm Selected.");
+            return;
         case 1: moves = getBubbleSortMoves(list);
             break;
         case 2: moves = getSelectionSortMoves(list);
@@ -75,24 +75,45 @@ function startAlgorithm() {
             break;
         default: break;
     }
-    visualisation(list, moves);
-}
+    visualisationHandler(list, moves);
+};
 
-async function visualisation(list, moves) {
-    for(let i = 0 ; i < moves.length ; ++i) {
-        if(moves[i][2] == SWAP) {
-            await swapVisualisation(list, moves[i][0], moves[i][1]);
-        }
-        else {
-            await highlightVisualisation(list, moves[i][0], moves[i][1]);
-        }
+function visualisationHandler(list, moves) {
+    if(moves.length === 0) {
+        markallVisited(list);
+        return;
     }
-    markallVisited(list);
+    else if(moves[0].length === 3) {
+        singularVisualisation(list, moves);
+    }
+    else {
+        rangeVisualisation(list, moves);
+    }
+};
+
+async function rangeVisualisation(list, moves) {
+    await updateRange(list, moves[0][3], "cell current");
+    let index = moves[0][0], value = Number(moves[0][1]);
+    list[index].setAttribute("value", value);
+    list[index].style.height = `${4*value}px`;
+    await updateRange(list, moves[0][3], "cell");
+
+    moves.shift();
+    visualisationHandler(list, moves);
+};
+
+async function singularVisualisation(list, moves) {
+    await updateClass(list, moves[0][0], moves[0][1], "cell current");
+    if(moves[0][2] == SWAP) {
+        await swapVisualisation(list, moves[0][0], moves[0][1]);
+    }
+    await updateClass(list, moves[0][0], moves[0][1], "cell");
+
+    moves.shift();
+    visualisationHandler(list, moves);
 };
 
 async function swapVisualisation(list, index1, index2) {
-    await updateClass(list, index1, index2, "cell current");
-    
     let indexOneValue = list[index1].getAttribute("value");
     let indexTwoValue = list[index2].getAttribute("value");
 
@@ -101,20 +122,21 @@ async function swapVisualisation(list, index1, index2) {
 
     list[index2].setAttribute("value", indexOneValue);
     list[index2].style.height = `${4*indexOneValue}px`;
-
-    await updateClass(list, index1, index2, "cell");
-};
-
-async function highlightVisualisation(list, index1, index2) {
-    await updateClass(list, index1, index2, "cell current");
-    await updateClass(list, index1, index2, "cell");
 };
 
 async function markallVisited(list) {
     for(let index = 0 ; index < list.length ; ++index) {
         await list[index].setAttribute("class", "cell done");
     }
-}
+};
+
+async function updateRange(list, indexes, className) {
+    await sleep();
+    for(let index = indexes[0] ; index <= indexes[1] ; ++index) {
+        list[index].setAttribute("class", className);
+    }
+    await sleep();
+};
 
 async function updateClass(list, index1, index2, className) {
     await sleep();
