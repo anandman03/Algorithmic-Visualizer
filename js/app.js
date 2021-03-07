@@ -91,6 +91,7 @@ function visualisationHandler(list, moves) {
     }
 };
 
+// Visualization functions for range props starts.
 async function rangeVisualisation(list, moves) {
     await updateRange(list, moves[0][3], "cell current");
     let index = moves[0][0], value = Number(moves[0][1]);
@@ -102,6 +103,16 @@ async function rangeVisualisation(list, moves) {
     visualisationHandler(list, moves);
 };
 
+async function updateRange(list, indexes, className) {
+    await sleep();
+    for(let index = indexes[0] ; index <= indexes[1] ; ++index) {
+        list[index].setAttribute("class", className);
+    }
+    await sleep();
+};
+// Visualization functions for range props end.
+
+// Visualization functions for swap props starts.
 async function singularVisualisation(list, moves) {
     await updateClass(list, moves[0][0], moves[0][1], "cell current");
     if(moves[0][2] == SWAP) {
@@ -130,17 +141,10 @@ async function markallVisited(list) {
     }
 };
 
-async function updateRange(list, indexes, className) {
-    await sleep();
-    for(let index = indexes[0] ; index <= indexes[1] ; ++index) {
-        list[index].setAttribute("class", className);
-    }
-    await sleep();
-};
-
 async function updateClass(list, index1, index2, className) {
     await sleep();
     list[index1].setAttribute("class", className);
     list[index2].setAttribute("class", className);
     await sleep();
 };
+// Visualization functions for swap props ends.
