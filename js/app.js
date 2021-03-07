@@ -54,24 +54,23 @@ function startAlgorithm() {
 
     let algorithmType = Number(document.querySelector(".algoMenu").value);
     switch (algorithmType) {
-        case 0:
-            console.log("Not proven !!");
+        case 0: console.log("Not proven !!");
             break;
-
-        case 1:
-            moves = getBubbleSortMoves(list);
+        case 1: moves = getBubbleSortMoves(list);
             break;
-
-        case 2:
-            moves = getSelectionSortMoves(list);
+        case 2: moves = getSelectionSortMoves(list);
             break;
-
-        case 3:
-            moves = getInsertionSortMoves(list);
+        case 3: moves = getInsertionSortMoves(list);
             break;
-
-        default:
+        case 4: moves = getMergeSortMoves(list);
             break;
+        case 5: moves = getQuickSortMoves(list);
+            break;
+        case 6: moves = getHeapSortMoves(list);
+            break;
+        case 7: moves = getTwistSortMoves(list);
+            break;
+        default: break;
     }
     visualisation(list, moves);
 }
