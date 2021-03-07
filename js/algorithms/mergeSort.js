@@ -4,16 +4,36 @@ function getMergeSortMoves(list) {
     let moves = [];
     let array = getNumericalValues(list);
 
-    for(let counter = 0 ; counter < (list.length - 1) ; ++counter) {
-        for(let index = 0 ; index < (list.length - counter - 1) ; ++index) {
-            if(array[index] > array[index + 1]) {
-                swap(array, index, index + 1);
-                moves.push([index, index + 1, SWAP]);
-            }
-            else {
-                moves.push([index, index + 1, NO_SWAP]);
-            }
+    mergeSort(array, 0, array.lenght - 1);
+    return moves;
+};
+
+function mergeSort(array, start, end) {
+    if(start < end) {
+        let mid = Math.floor((end + start) / 2);
+        mergeSort(array, start, mid);
+        mergeSort(array, mid+1, end);
+        merge(array, start, mid, end);
+    }
+    return;
+};
+
+function merge(array, start, mid, end) {
+    let sortArray = [];
+    let fptr = start, bptr = mid+1;
+    while(fptr <= mid && bptr <= end) {
+        if(array[fptr] < array[bptr]) {
+            sortArray.push(array[fptr++]);
+        }
+        else {
+            sortArray.push(array[bptr++]);
         }
     }
-    return moves;
+    while(fptr <= mid) sortArray.push(array[fptr++]);
+    while(bptr <= end) sortArray.push(array[bptr++]);
+
+    for(let index = start ; index <= end ; ++index) {
+        array[index] = sortArray[index - start];
+    }
+    return;
 };
