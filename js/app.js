@@ -18,12 +18,16 @@ document.write('<script type="text/javascript" src="./js/helpers/sleep.js"></scr
 document.write('<script type="text/javascript" src="./js/helpers/clearScreen.js"></script>');
 document.write('<script type="text/javascript" src="./js/helpers/getIntegerList.js"></script>');
 
+let speed = 1;
+
 window.onload = updateScreenContent;
 document.querySelector(".sizeMenu").onchange = updateScreenContent;
+document.querySelector(".speedMenu").onchange = function() {
+    speed = Number(document.querySelector(".speedMenu").value);
+};
 
 // For updating screen on every size change
 function updateScreenContent() {
-    console.log("Selected");
     let sizeFieldValue = document.querySelector(".sizeMenu").value;
     sizeFieldValue = (sizeFieldValue == 0) ? 30 : sizeFieldValue;
 
@@ -148,9 +152,9 @@ async function markallVisited(list) {
 };
 
 async function updateClass(list, index1, index2, className) {
-    await sleep();
+    // await sleep(speed);
     list[index1].setAttribute("class", className);
     list[index2].setAttribute("class", className);
-    await sleep();
+    await sleep(speed);
 };
 // Visualization functions for swap props ends.

@@ -1,5 +1,5 @@
-async function sleep() {
+async function sleep(speed) {
     return new Promise(resolve => {
-        setTimeout(() => { resolve(); }, 100);
+        setTimeout(() => { resolve(); }, 450 / speed);
     });
 };
