@@ -20,9 +20,11 @@ document.write('<script type="text/javascript" src="./js/helpers/getIntegerList.
 
 
 window.onload = updateScreenContent;
+document.querySelector(".sizeMenu").onchange = updateScreenContent;
 
 // For updating screen on every size change
 function updateScreenContent() {
+    console.log("Selected");
     let sizeFieldValue = document.querySelector(".sizeMenu").value;
     sizeFieldValue = (sizeFieldValue == 0) ? 30 : sizeFieldValue;
 
@@ -30,8 +32,7 @@ function updateScreenContent() {
     
     let list = generateList(sizeFieldValue);
     const collection = document.querySelector(".array");
-    for(const element of list)
-    {
+    for(const element of list) {
         const node = document.createElement("div");
         node.setAttribute("class", "cell");
         node.setAttribute("value", element);
