@@ -94,12 +94,17 @@ function visualisationHandler(list, moves) {
 // Visualization functions for range props starts.
 async function rangeVisualisation(list, moves) {
     await updateRange(list, moves[0][3], "cell current");
-    let index = moves[0][0], value = Number(moves[0][1]);
-    list[index].setAttribute("value", value);
-    list[index].style.height = `${4*value}px`;
-    await updateRange(list, moves[0][3], "cell");
+    let prevRangeStart = moves[0][3][0], prevRangeEnd = moves[0][3][1];
+    // keep looping until the range of updation changes.
+    while(moves.length && moves[0].length == 4 && prevRangeStart == moves[0][3][0] && prevRangeEnd == moves[0][3][1]) {
+        let index = moves[0][0], value = Number(moves[0][1]);
+        list[index].setAttribute("value", value);
+        list[index].style.height = `${4*value}px`;
+        moves.shift();
+    }
+    await updateRange(list, [prevRangeStart, prevRangeEnd], "cell");
 
-    moves.shift();
+    // moves.shift();
     visualisationHandler(list, moves);
 };
 
