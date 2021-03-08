@@ -18,7 +18,6 @@ document.write('<script type="text/javascript" src="./js/helpers/sleep.js"></scr
 document.write('<script type="text/javascript" src="./js/helpers/clearScreen.js"></script>');
 document.write('<script type="text/javascript" src="./js/helpers/getIntegerList.js"></script>');
 
-
 window.onload = updateScreenContent;
 document.querySelector(".sizeMenu").onchange = updateScreenContent;
 
