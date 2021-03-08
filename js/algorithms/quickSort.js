@@ -4,7 +4,7 @@ function getQuickSortMoves(list) {
     let moves = [];
     let array = getNumericalValues(list);
 
-    quickSort(array, 0, length-1, moves);
+    quickSort(array, 0, array.length-1, moves);
     console.log(array);
     return moves;
 };
