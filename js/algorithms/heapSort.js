@@ -4,15 +4,14 @@ function getHeapSortMoves(list) {
     let moves = [];
     let array = getNumericalValues(list);
 
-    for(let index = array.length - 1 ; index >= 0 ; --index) {
-        heapify(array, length, index, moves);
+    for(let index = Math.floor(array.length/2) - 1 ; index >= 0 ; --index) {
+        heapify(array, array.length, index, moves);
     }
     for(let index = array.length - 1 ; index >= 0 ; --index) {
-        moves.push([index, 0, SWAP]);
         swap(array, index, 0);
+        moves.push([0, index, SWAP]);
         heapify(array, index, 0, moves);
     }
-    console.log(array);
     return moves;
 };
 
