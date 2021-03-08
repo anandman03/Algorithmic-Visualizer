@@ -10,6 +10,7 @@ document.write('<script type="text/javascript" src="./js/algorithms/insertionSor
 document.write('<script type="text/javascript" src="./js/algorithms/mergeSort.js"></script>');
 document.write('<script type="text/javascript" src="./js/algorithms/heapSort.js"></script>');
 document.write('<script type="text/javascript" src="./js/algorithms/quickSort.js"></script>');
+document.write('<script type="text/javascript" src="./js/algorithms/twistSort.js"></script>');
 
 // importing helpers
 document.write('<script type="text/javascript" src="./js/helpers/swap.js"></script>');

@@ -4,15 +4,31 @@ function getTwistSortMoves(list) {
     let moves = [];
     let array = getNumericalValues(list);
 
-    for(let counter = 0 ; counter < (list.length - 1) ; ++counter) {
-        for(let index = 0 ; index < (list.length - counter - 1) ; ++index) {
-            if(array[index] > array[index + 1]) {
-                swap(array, index, index + 1);
-                moves.push([index, index + 1, SWAP]);
-            }
-            else {
-                moves.push([index, index + 1, NO_SWAP]);
-            }
+    twistSort(array, 0, array.length - 1, moves);
+    return moves;
+};
+
+function twistSort(array, start, end, moves) {
+    if(end > start) {
+        if(end - start <= 10) {
+            performInsertionSort(array, moves);
+        }
+        else {
+            let mid = start + Math.floor((end - start) / 2);
+            mergeSort(array, start, mid, moves);
+            mergeSort(array, mid+1, end, moves);
+            merge(array, start, mid, end, moves);
+        }
+    }
+};
+
+function performInsertionSort(array, moves) {
+    for(let index = start ; index < end ; ++index) {
+        let ptr = index - 1;
+        while(ptr >= start && array[ptr] > array[ptr + 1]) {
+            moves.push([ptr, ptr + 1, SWAP]);
+            swap(array, ptr + 1, ptr);
+            ptr -= 1;
         }
     }
     return moves;
