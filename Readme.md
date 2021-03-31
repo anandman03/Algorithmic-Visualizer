@@ -48,4 +48,4 @@ I wanted to improve my skills with HTML, JavaScript, CSS and also learn sorting 
 
 ## Contributor
 
-[Mansimar_Anand]https://www.linkedin.com/in/mansimar-anand)
+[Mansimar_Anand](https://www.linkedin.com/in/mansimar-anand)
