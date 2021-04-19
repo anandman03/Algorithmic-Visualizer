@@ -114,11 +114,11 @@ async function rangeVisualisation(list, moves) {
 };
 
 async function updateRange(list, indexes, className) {
-    await sleep();
+    await sleep(speed);
     for(let index = indexes[0] ; index <= indexes[1] ; ++index) {
         list[index].setAttribute("class", className);
     }
-    await sleep();
+    await sleep(speed);
 };
 // Visualization functions for range props end.
 
@@ -152,7 +152,6 @@ async function markallVisited(list) {
 };
 
 async function updateClass(list, index1, index2, className) {
-    // await sleep(speed);
     list[index1].setAttribute("class", className);
     list[index2].setAttribute("class", className);
     await sleep(speed);
