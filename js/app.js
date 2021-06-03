@@ -15,6 +15,7 @@ document.write('<script type="text/javascript" src="./js/algorithms/twistSort.js
 // importing helpers
 document.write('<script type="text/javascript" src="./js/helpers/swap.js"></script>');
 document.write('<script type="text/javascript" src="./js/helpers/sleep.js"></script>');
+document.write('<script type="text/javascript" src="./js/helpers/structure.js"></script>');
 document.write('<script type="text/javascript" src="./js/helpers/clearScreen.js"></script>');
 document.write('<script type="text/javascript" src="./js/helpers/getIntegerList.js"></script>');
 
@@ -88,7 +89,7 @@ function visualisationHandler(list, moves) {
         markallVisited(list);
         return;
     }
-    else if(moves[0].length === 3) {
+    else if(moves[0].status === SWAP || moves[0].status === NO_SWAP) {
         singularVisualisation(list, moves);
     }
     else {
@@ -98,11 +99,11 @@ function visualisationHandler(list, moves) {
 
 // Visualization functions for range props starts.
 async function rangeVisualisation(list, moves) {
-    await updateRange(list, moves[0][3], "cell current");
-    let prevRangeStart = moves[0][3][0], prevRangeEnd = moves[0][3][1];
+    await updateRange(list, moves[0].range, "cell current");
+    let prevRangeStart = moves[0].range[0], prevRangeEnd = moves[0].range[1];
     // keep looping until the range of updation changes.
-    while(moves.length && moves[0].length == 4 && prevRangeStart == moves[0][3][0] && prevRangeEnd == moves[0][3][1]) {
-        let index = moves[0][0], value = Number(moves[0][1]);
+    while(moves.length && moves[0].status == CHANGE_VALUE && prevRangeStart == moves[0].range[0] && prevRangeEnd == moves[0].range[1]) {
+        let index = moves[0].index, value = Number(moves[0].value);
         list[index].setAttribute("value", value);
         list[index].style.height = `${4*value}px`;
         moves.shift();
@@ -124,36 +125,38 @@ async function updateRange(list, indexes, className) {
 
 // Visualization functions for swap props starts.
 async function singularVisualisation(list, moves) {
-    await updateClass(list, moves[0][0], moves[0][1], "cell current");
-    if(moves[0][2] == SWAP) {
-        await swapVisualisation(list, moves[0][0], moves[0][1]);
+    await updateClass(list, moves[0].firstIndex, moves[0].secondIndex, "cell current");
+    if(moves[0].status == SWAP) {
+        await swapVisualisation(list, moves[0].firstIndex, moves[0].secondIndex);
     }
-    await updateClass(list, moves[0][0], moves[0][1], "cell");
+    await updateClass(list, moves[0].firstIndex, moves[0].secondIndex, "cell");
 
     moves.shift();
     visualisationHandler(list, moves);
 };
 
-async function swapVisualisation(list, index1, index2) {
-    let indexOneValue = list[index1].getAttribute("value");
-    let indexTwoValue = list[index2].getAttribute("value");
+// Swap Bars
+async function swapVisualisation(list, firstIndex, secondIndex) {
+    let indexOneValue = list[firstIndex].getAttribute("value");
+    let indexTwoValue = list[secondIndex].getAttribute("value");
 
-    list[index1].setAttribute("value", indexTwoValue);
-    list[index1].style.height = `${4*indexTwoValue}px`;
+    list[firstIndex].setAttribute("value", indexTwoValue);
+    list[firstIndex].style.height = `${4*indexTwoValue}px`;
 
-    list[index2].setAttribute("value", indexOneValue);
-    list[index2].style.height = `${4*indexOneValue}px`;
+    list[secondIndex].setAttribute("value", indexOneValue);
+    list[secondIndex].style.height = `${4*indexOneValue}px`;
 };
 
+// Mark all bars Green
 async function markallVisited(list) {
     for(let index = 0 ; index < list.length ; ++index) {
         await list[index].setAttribute("class", "cell done");
     }
 };
 
-async function updateClass(list, index1, index2, className) {
-    list[index1].setAttribute("class", className);
-    list[index2].setAttribute("class", className);
+async function updateClass(list, firstIndex, secondIndex, className) {
+    list[firstIndex].setAttribute("class", className);
+    list[secondIndex].setAttribute("class", className);
     await sleep(speed);
 };
 // Visualization functions for swap props ends.

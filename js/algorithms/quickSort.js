@@ -5,7 +5,6 @@ function getQuickSortMoves(list) {
     let array = getNumericalValues(list);
 
     quickSort(array, 0, array.length-1, moves);
-    console.log(array);
     return moves;
 };
 
@@ -21,15 +20,15 @@ function partition(array, start, end, moves) {
     let prevIndex = start - 1;
     for(let index = start ; index < end ; ++index) {
         if(index != end) {
-            moves.push([index, end, !SWAP]);
+            moves.push(Structure(index, end, NO_SWAP));
         }
         if(array[index] < array[end]) {
             ++prevIndex;
             swap(array, index, prevIndex);
-            moves.push([index, prevIndex, SWAP]);
+            moves.push(Structure(index, prevIndex, SWAP));
         }
     }
     swap(array, prevIndex+1, end);
-    moves.push([end, prevIndex+1, SWAP]);
+    moves.push(Structure(end, prevIndex+1, SWAP));
     return prevIndex+1;
 };

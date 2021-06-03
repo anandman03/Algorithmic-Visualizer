@@ -10,10 +10,10 @@ function getSelectionSortMoves(list) {
             if(array[ptr] < array[minIndex]) {
                 minIndex = ptr;
             }
-            moves.push([minIndex, ptr, NO_SWAP]);
+            moves.push(Structure(minIndex, ptr, NO_SWAP));
         }
         swap(array, minIndex, index);
-        moves.push([minIndex, index, SWAP]);
+        moves.push(Structure(minIndex, index, SWAP));
     }
     return moves;
 };

@@ -9,7 +9,7 @@ function getHeapSortMoves(list) {
     }
     for(let index = array.length - 1 ; index >= 0 ; --index) {
         swap(array, index, 0);
-        moves.push([0, index, SWAP]);
+        moves.push(Structure(0, index, SWAP));
         heapify(array, index, 0, moves);
     }
     return moves;
@@ -24,7 +24,7 @@ function heapify(array, length, index, moves) {
         largest = right;
     }
     if(largest != index) {
-        moves.push([index, largest, SWAP]);
+        moves.push(Structure(index, largest, SWAP));
         swap(array, index, largest);
         heapify(array, length, largest, moves);
     }

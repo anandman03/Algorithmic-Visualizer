@@ -33,6 +33,6 @@ function merge(array, start, mid, end, moves) {
 
     for(let index = start ; index <= end ; ++index) {
         array[index] = sortArray[index - start];
-        moves.push([index, array[index], CHANGE_VALUE, [start, end]]);
+        moves.push(RangeStructure(index, array[index], CHANGE_VALUE, [start, end]));
     }
 };

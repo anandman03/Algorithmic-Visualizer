@@ -11,7 +11,7 @@ function getTwistSortMoves(list) {
 function twistSort(array, start, end, moves) {
     if(end > start) {
         if(end - start <= 10) {
-            performInsertionSort(array, moves);
+            performInsertionSort(array, start, end, moves);
         }
         else {
             let mid = start + Math.floor((end - start) / 2);
@@ -22,11 +22,11 @@ function twistSort(array, start, end, moves) {
     }
 };
 
-function performInsertionSort(array, moves) {
-    for(let index = start ; index < end ; ++index) {
+function performInsertionSort(array, start, end, moves) {
+    for(let index = start ; index <= end ; ++index) {
         let ptr = index - 1;
         while(ptr >= start && array[ptr] > array[ptr + 1]) {
-            moves.push([ptr, ptr + 1, SWAP]);
+            moves.push(Structure(ptr, ptr + 1, SWAP));
             swap(array, ptr + 1, ptr);
             ptr -= 1;
         }

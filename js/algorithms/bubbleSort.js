@@ -8,10 +8,10 @@ function getBubbleSortMoves(list) {
         for(let index = 0 ; index < (list.length - counter - 1) ; ++index) {
             if(array[index] > array[index + 1]) {
                 swap(array, index, index + 1);
-                moves.push([index, index + 1, SWAP]);
+                moves.push(Structure(index, index + 1, SWAP));
             }
             else {
-                moves.push([index, index + 1, NO_SWAP]);
+                moves.push(Structure(index, index + 1, NO_SWAP));
             }
         }
     }
